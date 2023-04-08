@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contentwriter-deployment
+  labels:
+    app: contentwriter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: contentwriter
+  template:
+    metadata:
+      labels:
+        app: contentwriter
+    spec:
+      containers:
+        - name: contentwriter
+          image: bartvnim/trackpackers-contentwriting:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: MONGODB_URI
+              value: "mongodb://mongodb-service:27017/"
+            - name: KAFKA_URI
+              value: "kafka-service:9092"
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: contentwriter-service
+spec:
+  selector:
+    app: contentwriter
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30200
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  labels:
+    app: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongodb-storage
+              mountPath: /data/db
+      volumes:
+        - name: mongodb-storage
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - name: mongodb
+      port: 27017
+      targetPort: 27017
