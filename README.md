@@ -20,7 +20,7 @@
 
 ##### Connections:
 
-[ContentWriting Microservice](https://github.com/TrackPackers/ContentWritingService) - /contentwriter
+[ContentWriting Microservice](https://github.com/TrackPackers/ContentWritingService) - /contentwriter  
 [newPostsFeed Microservice](https://github.com/TrackPackers/newPostsFeed) - /newpostsfeed
 
 ##### Errors:
