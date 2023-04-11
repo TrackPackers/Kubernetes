@@ -24,8 +24,8 @@
 ##### Errors:
 If you get the error along the lines: 'Already exists'. You can restart with removing the helm repo:
 ```bash
-helm repo list
-helm repo remove (ingress-nginx)
+helm repo remove ingress-nginx
+kubectl delete ns ingress-nginx
 ```
 
 
