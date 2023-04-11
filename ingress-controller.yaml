@@ -10,13 +10,20 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS"
 spec:
   rules:
-  # - host: <Host>
-  - http:
-      paths:
-      - pathType: Prefix
-        path: /contentwriter(/|$)(.*)
-        backend:
-          service:
-            name: contentwriter-service
-            port: 
-              number: 80
+    # - host: <Host>
+    - http:
+        paths:
+          - pathType: Prefix
+            path: /contentwriter(/|$)(.*)
+            backend:
+              service:
+                name: contentwriter-service
+                port:
+                  number: 80
+          - pathType: Prefix
+            path: /newpostsfeed(/|$)(.*)
+            backend:
+              service:
+                name: newpostsfeed-service
+                port:
+                  number: 80
