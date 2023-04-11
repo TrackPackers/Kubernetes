@@ -1,10 +1,10 @@
 # Running Local Kubernetes
 
 ##### Requirement:
+
 - [Kubectl](https://kubernetes.io/docs/taskvvs/tools/)
 - [Docker desktop](https://www.docker.com/products/docker-desktop/)
 - [Helm](https://helm.sh)
-
 
 ##### Setup:
 
@@ -19,14 +19,15 @@
 5. `kubectl apply -f .`
 
 ##### Connections:
+
 [ContentWriting Microservice](https://github.com/TrackPackers/ContentWritingService) - /contentwriter
+[newPostsFeed Microservice](https://github.com/TrackPackers/newPostsFeed) - /newpostsfeed
 
 ##### Errors:
+
 If you get the error along the lines: 'Already exists'. You can restart with removing the helm repo:
+
 ```bash
 helm repo remove ingress-nginx
 kubectl delete ns ingress-nginx
 ```
-
-
-
