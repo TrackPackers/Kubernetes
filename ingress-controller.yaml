@@ -27,3 +27,10 @@ spec:
                 name: newpostsfeed-service
                 port:
                   number: 80
+          - pathType: Prefix
+            path: /userservice(/|$)(.*)
+            backend:
+              service:
+                name: userservice-service
+                port:
+                  number: 80
